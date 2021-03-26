@@ -717,6 +717,7 @@ public final class ServerLoadDataInfileHandler implements LoadDataInfileHandler 
     @Override
     public void end(byte packetId) {
         resetProto();
+        isStart = false;
         service.setPacketId(packetId);
         //empty packet for end
         saveByteOrToFile(null, true);
