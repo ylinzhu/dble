@@ -329,7 +329,7 @@ public class MultiNodeQueryHandler extends MultiNodeHandler implements LoadDataR
                 }
                 ok.setPacketId(session.getShardingService().nextPacketId()); // OK_PACKET
                 if (rrs.isLoadData()) {
-                    ok.setMessage(("Records: " + affectedRows + "  Deleted: 0  Skipped: 0  Warnings: 0").getBytes());
+                    ok.setMessage(("Records: " + affectedRows + "  Deleted: 0  Skipped: 0  Warnings: " + ok.getWarningCount()).getBytes());
                     shardingService.getLoadDataInfileHandler().clear();
                 } else {
                     ok.setMessage(null);
