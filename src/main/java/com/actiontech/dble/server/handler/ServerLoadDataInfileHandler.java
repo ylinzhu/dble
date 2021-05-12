@@ -8,8 +8,8 @@ package com.actiontech.dble.server.handler;
 import com.actiontech.dble.DbleServer;
 import com.actiontech.dble.backend.mysql.CharsetUtil;
 import com.actiontech.dble.backend.mysql.proto.handler.Impl.MySQLProtoHandlerImpl;
-import com.actiontech.dble.backend.mysql.store.fs.FileUtils;
 import com.actiontech.dble.backend.mysql.proto.handler.ProtoHandler;
+import com.actiontech.dble.backend.mysql.store.fs.FileUtils;
 import com.actiontech.dble.btrace.provider.ClusterDelayProvider;
 import com.actiontech.dble.config.ErrorCode;
 import com.actiontech.dble.config.model.SystemConfig;
@@ -395,7 +395,6 @@ public final class ServerLoadDataInfileHandler implements LoadDataInfileHandler 
         }
 
         RouteResultset rrs = tryDirectRoute(sql, line);
-
         if (rrs == null || rrs.getNodes() == null || rrs.getNodes().length == 0) {
             //do nothing
             throw new Exception("record " + StringUtil.join(line, loadData.getLineTerminatedBy()) + "has no route result");
@@ -493,7 +492,7 @@ public final class ServerLoadDataInfileHandler implements LoadDataInfileHandler 
         boolean first = Strings.isNullOrEmpty(data.getFileName());
         if (!first) index++;
         tempFileName = FileUtils.getName(tempFileName);
-        String curFileName = index + "-" + tempFileName.substring(0, tempFileName.lastIndexOf(".")) + "-" + name + ".txt";
+        String curFileName = index + "-" + tempFileName.substring(0, tempFileName.lastIndexOf(".")) + "-" + tableName + "-" + name + ".txt";
         String dnPath = loadDataPath + curFileName;
         File dnFile = new File(dnPath);
         try {
